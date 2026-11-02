@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web 1. Sınav Tekrar Sayfası</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F7FA;--card:#fff;--ink:#18212F;--mute:#5B6678;--line:#E3E8EF;--acc:#3B5BDB;--soft:#E8EDFD;--tip:#FFF4D6;--tipink:#6B4E00;--code:#EEF1F6;--m:#FDE8D8;--b:#FBD5D5;--p:#D8F2E3;--c:#DCE6FF;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1420;--card:#171E2E;--ink:#E8ECF4;--mute:#9AA6BA;--line:#26304A;--acc:#8FA6FF;--soft:#1E2850;--tip:#3A2F10;--tipink:#F2D58A;--code:#1F2740;--m:#3A2A22;--b:#3E2530;--p:#1D3A2D;--c:#22305A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1420;--card:#171E2E;--ink:#E8ECF4;--mute:#9AA6BA;--line:#26304A;--acc:#8FA6FF;--soft:#1E2850;--tip:#3A2F10;--tipink:#F2D58A;--code:#1F2740;--m:#3A2A22;--b:#3E2530;--p:#1D3A2D;--c:#22305A;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Figtree,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header.hero{padding:56px 0 28px}
+h1{font:800 clamp(2.2rem,6vw,3.6rem)/1.05 "Bricolage Grotesque",sans-serif;margin:0 0 12px;letter-spacing:-.02em}
+.sub{color:var(--mute);margin:0;max-width:52ch}
+nav.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0}
+nav.bar .wrap{display:flex;gap:8px;align-items:center;overflow-x:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:500;font-size:.9rem;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line)}
+nav a:hover{border-color:var(--acc);color:var(--acc)}
+#mode{margin-left:auto;flex:none;font:600 .9rem Figtree,sans-serif;padding:6px 16px;border-radius:99px;border:1px solid var(--acc);background:transparent;color:var(--acc);cursor:pointer}
+body.quiz #mode{background:var(--acc);color:var(--bg)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+section{padding:56px 0 8px}
+h2{font:700 clamp(1.6rem,4vw,2.1rem)/1.15 "Bricolage Grotesque",sans-serif;margin:0 0 6px;letter-spacing:-.01em}
+.lead{color:var(--mute);margin:0 0 24px}
+h3{font:700 1.15rem "Bricolage Grotesque",sans-serif;margin:32px 0 12px}
+dl{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:grid;grid-template-columns:190px 1fr;gap:8px 24px;padding:16px 22px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+dt{font-weight:600;color:var(--acc)}
+dd{margin:0}
+ul.plain{margin:6px 0 0;padding-left:20px}
+ul.plain li{margin:4px 0}
+code{font:500 .88em "Fira Code",monospace;background:var(--code);padding:2px 7px;border-radius:6px;overflow-wrap:anywhere}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tags span{background:var(--soft);color:var(--acc);padding:3px 12px;border-radius:99px;font-weight:500;font-size:.9rem}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--acc);color:var(--bg);font-weight:700}
+.note{background:var(--tip);color:var(--tipink);border-radius:14px;padding:14px 20px;margin-top:16px}
+.note b{font-weight:700}
+.dom{font:500 .95rem "Fira Code",monospace;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 24px;line-height:1.9;overflow-x:auto}
+.dom i{display:block;font-style:normal}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px}
+.box p{margin:4px 0 0}
+.bm{display:grid;grid-template-columns:minmax(220px,1fr) 1.2fr;gap:24px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.lay{padding:16px;border-radius:10px;background:var(--m);text-align:center;font-weight:600;font-size:.85rem}
+.lay .lay{background:var(--b)}.lay .lay .lay{background:var(--p)}.lay .lay .lay .lay{background:var(--c);padding:22px 8px}
+.lay small{display:block;font-weight:500;opacity:.75;margin-bottom:6px}
+.demo{display:grid;grid-template-areas:"h h h" "s m m" "f f f";grid-template-columns:1fr 2fr 2fr;gap:8px;min-height:190px;grid-template-rows:auto 1fr auto}
+.demo div{display:grid;place-items:center;border-radius:10px;font:500 .85rem "Fira Code",monospace;background:var(--soft);color:var(--acc);padding:8px}
+.demo .h{grid-area:h}.demo .s{grid-area:s}.demo .m{grid-area:m;background:var(--p);color:inherit}.demo .f{grid-area:f}
+pre{margin:0;font:400 .88rem/1.7 "Fira Code",monospace;background:var(--code);padding:16px 18px;border-radius:12px;overflow-x:auto}
+.gd{display:grid;grid-template-columns:1fr 1.1fr;gap:20px;align-items:start;margin-top:12px}
+body.quiz dd,body.quiz .ans{filter:blur(7px);cursor:pointer;user-select:none;transition:filter .2s}
+body.quiz dd.show,body.quiz .ans.show{filter:none;user-select:auto}
+footer{padding:56px 0 48px;color:var(--mute);font-size:.9rem}
+@media (max-width:700px){.row{grid-template-columns:1fr;gap:4px;padding:14px 18px}.two,.bm,.gd{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}body.quiz dd{transition:none}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>Web 1. Sınav Özeti</h1>
+<p class="sub">2026-2027 notlarının sade, tekrar etmeye uygun hali. Kendini sınamak için sağ üstteki düğmeyle cevapları gizle, görmek istediğine dokun.</p>
+</div></header>
+
+<nav class="bar"><div class="wrap">
+<a href="#temel">Web temelleri</a><a href="#html">HTML</a><a href="#css">CSS</a><a href="#grid">CSS Grid</a>
+<button id="mode" type="button" aria-pressed="false">Kendini sına</button>
+</div></nav>
+
+<main class="wrap">
+
+<section id="temel">
+<h2>Web temelleri</h2>
+<p class="lead">Kavramlar, roller, tasarım ve geliştirme süreci.</p>
+<dl>
+<div class="row"><dt>WWW</dt><dd>World Wide Web: dünya çapında milyonlarca elektronik cihazı birbirine bağlayan ağ.</dd></div>
+<div class="row"><dt>Client</dt><dd>İstemci bilgisayar. Web sitesini görüntülemek isteyen (request) cihazdır.</dd></div>
+<div class="row"><dt>Server</dt><dd>Sunucu bilgisayar. Web site içeriğini barındıran (host) ve yayınlayan (response) cihazdır.</dd></div>
+<div class="row"><dt>Browser</dt><dd>Site içeriğine adres (domain) üzerinden ulaşmayı sağlayan yazılım.<div class="tags"><span>Chrome</span><span>Opera</span><span>Firefox</span><span>Edge</span><span>Safari</span><span>Brave</span><span>Yandex</span></div></dd></div>
+<div class="row"><dt>Yazılımcı / tasarımcı rolleri</dt><dd><div class="tags" style="margin-top:0"><span>UI/UX Designer</span><span>Front-end Developer</span><span>Back-end Developer</span></div></dd></div>
+</dl>
+
+<h3>Tasarım prensipleri</h3>
+<p class="lead" style="margin-bottom:14px">Site = tasarım + içerik. Amaç, içeriği kullanıcıya verimli sunmak. Gereksiz öğelerden ve aşırılıktan kaçın.</p>
+<div class="two">
+<div class="box"><b>Hizalama</b><p>alignment</p></div>
+<div class="box"><b>Beyaz alan kullanımı</b><p>whitespace</p></div>
+<div class="box"><b>Renk paleti seçimi</b><p>colorhunt</p></div>
+<div class="box"><b>Kaliteli grafik ve font</b><p>vektörel grafik, Google Fonts vb.</p></div>
+</div>
+
+<h3>Web sitesi geliştirme aşamaları</h3>
+<ol class="steps">
+<li><div class="ans">Figma / Adobe XD ile taslak ve prototip oluşturma</div></li>
+<li><div class="ans">Visual Studio Code ile HTML Layout (site şablonu) kodlama: <code>CSS Grid</code> <code>CSS Flex</code> <code>CSS Position</code> <code>CSS Float</code></div></li>
+<li><div class="ans">CSS ile biçimsel özellikleri tanımlama: renk, grafik, font, animasyon vb.</div></li>
+<li><div class="ans">Content (içerik) girişi</div></li>
+</ol>
+</section>
+
+<section id="html">
+<h2>HTML</h2>
+<p class="lead">DOM yapısı, layout nesneleri ve dizilişleri.</p>
+<h3 style="margin-top:0">DOM yapısı</h3>
+<div class="dom">
+<i>&lt;html&gt;</i>
+<i>&nbsp;&nbsp;&lt;head&gt;&lt;/head&gt;</i>
+<i>&nbsp;&nbsp;&lt;body&gt;&lt;/body&gt;</i>
+<i>&lt;/html&gt;</i>
+</div>
+<p>HTML nesneleri iç içe ve hiyerarşiktir. Kapsayıcı nesneye <b>parent</b>, altındakilere <b>child</b> node denir.</p>
+<div class="note"><b>Bilgi:</b> DOM hiyerarşisinde en iç seviyede tanımlanan nesnenin görünme önceliği en fazladır.</div>
+
+<h3>Layout nesneleri</h3>
+<dl>
+<div class="row"><dt>Semantic (anlamsal)</dt><dd><div class="tags" style="margin-top:0"><span>header</span><span>main</span><span>footer</span><span>article</span><span>section</span><span>nav</span><span>aside</span></div></dd></div>
+<div class="row"><dt>Kutu nesneleri</dt><dd><div class="tags" style="margin-top:0"><span>div</span><span>span</span></div></dd></div>
+</dl>
+
+<h3>Nesne dizilişleri</h3>
+<div class="two">
+<div class="box"><b>Block</b> (alt alta sıralı)<p><code>&lt;h1&gt;</code> <code>&lt;p&gt;</code> <code>&lt;ul&gt;</code> <code>&lt;li&gt;</code> <code>&lt;div&gt;</code> <code>&lt;table&gt;</code> <code>&lt;tr&gt;</code></p></div>
+<div class="box"><b>Inline</b> (yatay sıralı)<p><code>&lt;td&gt;</code> <code>&lt;a&gt;</code> <code>&lt;img&gt;</code></p></div>
+</div>
+</section>
+
+<section id="css">
+<h2>CSS</h2>
+<p class="lead">Kullanım şekilleri, seçiciler, ölçü birimleri ve kutu modeli.</p>
+
+<h3 style="margin-top:0">Kullanım şekilleri</h3>
+<dl>
+<div class="row"><dt>Yerel CSS</dt><dd><code>&lt;h1 style="color:red"&gt;</code></dd></div>
+<div class="row"><dt>Genel CSS</dt><dd><code>&lt;head&gt;&lt;style&gt;color:red;&lt;/style&gt;&lt;/head&gt;</code></dd></div>
+<div class="row"><dt>Harici CSS</dt><dd><code>&lt;head&gt;&lt;link rel="stylesheet" href="style.css"&gt;&lt;/head&gt;</code></dd></div>
+</dl>
+
+<h3>Seçiciler</h3>
+<dl>
+<div class="row"><dt><code>*</code></dt><dd>Tüm HTML nesnelerini seçer.</dd></div>
+<div class="row"><dt>Tag seçici</dt><dd><code>main{color:red}</code></dd></div>
+<div class="row"><dt>ID seçici</dt><dd><code>#kutu{color:red}</code></dd></div>
+<div class="row"><dt>Class seçici</dt><dd><code>.kirmiziKutu{color:red}</code></dd></div>
+</dl>
+
+<h3>Sözde (pseudo) seçiciler</h3>
+<div class="tags" style="margin-top:0"><span>:after</span><span>:before</span><span>:first-child</span><span>:last-child</span><span>:nth-child()</span></div>
+
+<h3>Özel seçiciler</h3>
+<dl>
+<div class="row"><dt><code>div &gt; h3</code></dt><dd>div altında tanımlı <b>çocuk</b> h3 nesnesini seçer.</dd></div>
+<div class="row"><dt><code>div h3</code></dt><dd>div altında tanımlı tüm <b>çocuk ve torun</b> h3 nesnelerini seçer.</dd></div>
+</dl>
+
+<h3>Ölçü birimleri</h3>
+<div class="two">
+<div class="box"><b>Mutlak (absolute)</b><div class="tags"><span>px</span><span>pt</span><span>mm</span><span>cm</span></div></div>
+<div class="box"><b>Bağıl (relative)</b><div class="tags"><span>%</span><span>em</span><span>rem</span><span>fr</span><span>vw</span><span>vh</span><span>dvh</span><span>auto</span></div></div>
+</div>
+
+<h3>Kutu modeli</h3>
+<div class="bm">
+<div class="lay" aria-hidden="true"><small>Margin</small><div class="lay"><small>Border</small><div class="lay"><small>Padding</small><div class="lay">Content</div></div></div></div>
+<dl style="border:0;background:none;border-radius:0">
+<div class="row" style="grid-template-columns:100px 1fr;padding:8px 0"><dt>Content</dt><dd>İçerik</dd></div>
+<div class="row" style="grid-template-columns:100px 1fr;padding:8px 0"><dt>Padding</dt><dd>İçerikle kenarlık arası boşluk</dd></div>
+<div class="row" style="grid-template-columns:100px 1fr;padding:8px 0"><dt>Border</dt><dd>Kenarlık</dd></div>
+<div class="row" style="grid-template-columns:100px 1fr;padding:8px 0"><dt>Margin</dt><dd>Kutunun diğer nesnelere mesafesi</dd></div>
+<div class="row" style="grid-template-columns:100px 1fr;padding:8px 0"><dt>Width</dt><dd>Genişlik</dd></div>
+<div class="row" style="grid-template-columns:100px 1fr;padding:8px 0"><dt>Height</dt><dd>Yükseklik</dd></div>
+</dl>
+</div>
+<div class="note"><b>Not:</b> <code>box-sizing: border-box</code> özelliği kullanılırsa kutunun toplam genişlik ve yüksekliğine kenarlık, padding ve margin değerleri etki etmez!</div>
+</section>
+
+<section id="grid">
+<h2>CSS Grid</h2>
+<p class="lead">Sayfayı iki boyutlu parselleyen ızgara sistemi.</p>
+<p>Enine ve boyuna grid çizgileriyle ızgara şeklinde bölümlendirir. Hücreler, sütun çizgilerinin oluşturduğu <b>sütunlar</b> (grid-column) ile satır çizgilerinin oluşturduğu <b>satırların</b> (grid-row) kesişiminde oluşur. Masaüstü layout tasarımları genel olarak <b>12 sütunlu</b> yapılar kullanır.</p>
+
+<div class="gd">
+<div class="demo" aria-label="Grid örneği"><div class="h">header</div><div class="s">sidebar</div><div class="m">main</div><div class="f">footer</div></div>
+<pre>.demo {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-areas:
+    "h h h"
+    "s m m"
+    "f f f";
+  gap: 8px;
+}
+.m { grid-area: m; }</pre>
+</div>
+
+<h3>Kapsayıcı özellikleri</h3>
+<dl>
+<div class="row"><dt><code>display: grid;</code></dt><dd>Nesnelerin görünüm ve yerleşim modunu grid olarak ayarlar.</dd></div>
+<div class="row"><dt><code>grid-template-columns: 100px 1fr 2fr 4fr;</code></dt><dd>Grid içinde 4 adet sütun tanımlar.</dd></div>
+<div class="row"><dt><code>grid-template-rows: repeat(4,auto);</code></dt><dd>Grid içinde 4 adet satır tanımlar.</dd></div>
+<div class="row"><dt><code>grid-template-areas: "header header header";</code></dt><dd>Grid içinde sözel olarak alanları haritalar.</dd></div>
+<div class="row"><dt><code>gap: 10px;</code></dt><dd>Grid hücreleri arasında boşluk oluşturur.</dd></div>
+</dl>
+
+<h3>Çocuk nesne özellikleri</h3>
+<dl>
+<div class="row"><dt><code>grid-column: 1/5;</code></dt><dd>Sütunun başlangıç ve bitiş çizgisini belirler.</dd></div>
+<div class="row"><dt><code>grid-row: 1/ span 2;</code></dt><dd>Satırın başlangıç çizgisini ve satır birleştirme miktarını belirler.</dd></div>
+<div class="row"><dt><code>grid-area: ustAlan;</code></dt><dd>Sayfa haritalamasındaki yerleşimi için çocuk nesneyi etiketler.</dd></div>
+</dl>
+
+<h3>Akılda kalsın</h3>
+<div class="note" style="margin-top:0"><b>fr birimi:</b> Grid sistemine özel, orantısal birimdir. Sütun ve satır boyutlarını kapsayıcıya endeksli olarak dağıtır. Sayısal birimler (px, %) de kullanılabilir.</div>
+<div class="note"><b>repeat:</b> Aynı ölçüde birden fazla sütun veya satır oluşturmak için kullanılır.</div>
+<div class="note"><b>grid-template-areas:</b> Layout tasarımlarında alanların yerleşimi için genelde sözel haritalama (yerleşim planı) yapılır.</div>
+<div class="note"><b>Sıralama:</b> DOM akışında ilk sırada olan nesne ilk sırada görünmek zorunda değildir. grid-column, grid-row ve grid-area değerleri sıralamayı belirler.</div>
+</section>
+</main>
+
+<footer><div class="wrap">Web 1. Sınav Özeti, 2026-2027. Başarılar!</div></footer>
+
+<script>
+(function(){
+var b=document.getElementById('mode');
+function reveal(e){var t=e.target.closest('dd,.ans');if(t&&document.body.classList.contains('quiz')){t.classList.toggle('show');}}
+document.addEventListener('click',reveal);
+b.addEventListener('click',function(){
+var on=document.body.classList.toggle('quiz');
+b.setAttribute('aria-pressed',on);
+b.textContent=on?'Cevapları göster':'Kendini sına';
+if(!on){document.querySelectorAll('.show').forEach(function(x){x.classList.remove('show');});}
+});
+})();
+</script>
+</body>
+</html>
